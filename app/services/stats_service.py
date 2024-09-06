@@ -1,5 +1,4 @@
 from app.services import week_service
-from app.models import Week,Expense
 from app.services import expense_service
 
 
