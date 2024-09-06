@@ -1,7 +1,4 @@
 from datetime import datetime
-
-from sqlalchemy import false
-
 from app import db
 from app.services.db_service import db_commit
 from app.models import User, Week, start_of_week, end_of_week
