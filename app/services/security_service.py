@@ -69,7 +69,7 @@ def require_access_token(func):
             app.logger.error("Token with src has been used for access attempt!!")
             abort(401)
         except ExpiredSignatureError:
-            return jsonify({'message': "Your session expired. Please login."}), 401
+            return jsonify({'message': "Your session has expired. Please login."}), 401
         except Exception as e:
             app.logger.error(f"An error occurred: {str(e)}")
             abort(500)
