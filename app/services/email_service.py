@@ -1,5 +1,3 @@
-
-
 from flask import jsonify,current_app as app
 from flask_mail import Message
 from app.services import security_service,user_service
