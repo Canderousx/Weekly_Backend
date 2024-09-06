@@ -66,7 +66,7 @@ def require_access_token(func):
             if claims.get('src') is None:
                 return func(*args, **kwargs)
 
-            app.logger.error("Token without proper src has been used for access attempt!!")
+            app.logger.error("Token with src has been used for access attempt!!")
             abort(401)
         except ExpiredSignatureError:
             return jsonify({'message': "Your session expired. Please login."}), 401
