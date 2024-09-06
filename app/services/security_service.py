@@ -44,7 +44,7 @@ def require_email_confirmation_token(func):
             claims = get_jwt()
             if claims.get('src') != 'email_confirmation':
                 app.logger.error("Token without proper src has been used for email confirmation attempt!!")
-                return jsonify({'message': "Unauthorized"}), 401
+                abort(401)
             return func(*args, **kwargs)
         except ExpiredSignatureError:
             token = get_raw_token()
@@ -54,7 +54,7 @@ def require_email_confirmation_token(func):
             return jsonify({'message': "Link expired. New confirmation mail has been sent."}), 401
         except Exception as e:
             app.logger.error(f"An error occurred: {str(e)}")
-            return jsonify({'message': "An error occurred. Please try again."}), 500
+            abort(500)
     return wrapper
 
 def require_access_token(func):
@@ -67,12 +67,12 @@ def require_access_token(func):
                 return func(*args, **kwargs)
 
             app.logger.error("Token without proper src has been used for access attempt!!")
-            return jsonify({'message': "Unauthorized"}), 401
+            abort(401)
         except ExpiredSignatureError:
             return jsonify({'message': "Your session expired. Please login."}), 401
         except Exception as e:
             app.logger.error(f"An error occurred: {str(e)}")
-            return jsonify({'message': "An error occurred. Please try again."}), 500
+            abort(500)
 
 
 
@@ -89,16 +89,14 @@ def require_password_recovery_token(func):
             claims = get_jwt()
             if claims.get('src') != 'password_recovery':
                 app.logger.error("Access token has been used to attempt recovering a password!!")
-                return jsonify({'message': "Unauthorized"}), 401
+                abort(401)
             return func(*args, **kwargs)
         except ExpiredSignatureError:
-            token = get_raw_token()
-            email = decode_token(token, allow_expired=True).get('sub', 'unknown')
             app.logger.info('Password recovery token is expired!')
-            return jsonify({'message': "Link expired. New recovery mail has been sent."}), 401
+            return jsonify({'message': "Password recovery token expired"}), 401
         except Exception as e:
             app.logger.error(f"An error occurred: {str(e)}")
-            return jsonify({'message': "An error occurred. Please try again."}), 500
+            abort(500)
     return wrapper
 
 
