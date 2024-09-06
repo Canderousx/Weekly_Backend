@@ -64,12 +64,9 @@ def login (email, password):
 def get_user_by_email(email):
     user = User.query.filter_by(email = email).first()
     if user.weeklyPlan is None:
-        print("User weekly plan is not set up!")
         user.weeklyPlan = 0.0
     if user.currency is None:
-        print("Setting default currency")
         user.currency = Currency.PLN.value
-
     return user
 
 @db_commit
