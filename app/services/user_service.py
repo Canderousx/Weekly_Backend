@@ -71,7 +71,7 @@ def get_user_by_email(email):
 
 @db_commit
 def set_user_weekly_plan(data,user):
-    if data['weeklyPlan'] is None or data['currency'] is None:
+    if data.get('weeklyPlan') is None or data.get('currency') is None:
         app.logger.error('Missing data')
         return False
     if user.weeklyPlan is None:
@@ -83,7 +83,7 @@ def set_user_weekly_plan(data,user):
 
 @db_commit
 def edit_user_weekly_plan(data,user):
-    if data['weeklyPlan'] is None:
+    if data.get('weeklyPlan') is None:
         app.logger.error('Missing data')
         return False
     user.set_weekly_plan(data['weeklyPlan'])
