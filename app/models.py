@@ -15,11 +15,11 @@ from app.services.formatter_service import format_date
 
 
 def start_of_week():
-    today = datetime.now()
+    today = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0)
     return today - timedelta(days=today.weekday())
 
 def end_of_week():
-    today = datetime.now()
+    today = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0)
     days_until_end = 6 - today.weekday()
     return today + timedelta(days=days_until_end)
 

@@ -90,7 +90,7 @@ def edit_user_weekly_plan(data,user):
     return True
 
 def get_today_week(user):
-    today = datetime.now()
+    today = datetime.now().replace(hour=0,minute=0,second=0,microsecond=0)
     week = Week.query.filter_by(user_id=user.id) \
         .filter(Week.week_start <= today, Week.week_end >= today) \
         .first()
