@@ -10,7 +10,7 @@ def get_average_week_expense(user_id):
     sum_expenses = 0.0
     for week in  weeks:
         sum_expenses += expense_service.get_week_expenses_amount(week.id)
-    return  sum_expenses / quantity
+    return  round(sum_expenses / quantity,2)
 
 
 def get_average_total_expense(user_id):
