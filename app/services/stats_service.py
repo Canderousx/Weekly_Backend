@@ -2,7 +2,7 @@ from app.services import week_service
 from app.services import expense_service
 
 
-# jakis tam dodatek na cele gita
+# jakis tam dodatek na cele gita hhhffdg
 
 
 def get_average_week_expense(user_id):
