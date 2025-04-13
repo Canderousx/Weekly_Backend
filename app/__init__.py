@@ -17,6 +17,8 @@ migrate = Migrate()
 jwt = JWTManager()
 mail = Mail()
 
+# test for GIT
+
 def logger_setup(app):
     app.logger.setLevel(logging.INFO)
 
